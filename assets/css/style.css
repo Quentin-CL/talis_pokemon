@@ -1,0 +1,116 @@
+/* Reset CSS */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    text-decoration: none;
+    color: black;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+    overflow-x: hidden;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+header{
+    height: 10vh ;
+    text-align: center;
+    padding: 10px 1rem;
+}
+header img{
+    height: 100%;
+}
+
+@font-face {
+    font-family:"pokemon";
+    src: url("../font/Pokemon\ Solid.ttf");
+}
+
+main{
+    max-width: 1048px;
+    margin: 0 auto;
+    padding: 0 0;
+    text-align: center;
+}
+h1{
+    font-family: "pokemon";
+    font-size: 30px;
+    margin: 1rem 0;
+}
+.pokemon-card-container{
+    max-width: 250px;
+    text-align: center;
+    border-radius: 7px;
+    box-sizing: border-box;
+    padding: 10px;
+}
+.pokemon-card-container img{
+    width: 100%;
+}
+.pokemons-list{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+.pokemons-container{
+    display: grid;
+    grid-template: auto auto auto/ fit-content;
+}
+form{
+    margin-top: 1rem;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+.fire-box{
+    box-shadow: rgba(191, 43, 43, 0.25) 0px 6px 12px -2px, rgba(191, 43, 43, 0.3) 0px 3px 7px -3px;
+    border: 1px solid rgb(191, 43, 43);
+}
+.water-box{
+    box-shadow: rgba(43, 145, 191, 0.25) 0px 6px 12px -2px, rgba(43, 145, 191, 0.3) 0px 3px 7px -3px;
+    border: 1px solid rgb(43, 145, 191);
+}
+.plant-box{
+    box-shadow: rgba(62, 150, 37, 0.25) 0px 6px 12px -2px, rgba(62, 150, 37, 0.3) 0px 3px 7px -3px;
+    border: 1px solid rgb(62, 150, 37);
+}
+.normal-box{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    border: 1px solid rgb(50, 50, 93);
+}
