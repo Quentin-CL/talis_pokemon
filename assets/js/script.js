@@ -1,3 +1,4 @@
+// Appel de l'API pokemon en fonction de la demande utilisateur (type et nom du pokemon) et appel de la création de carte
 const showPokemons = async (name = null, type = null) => {
     let pokemons
     try {
@@ -6,7 +7,7 @@ const showPokemons = async (name = null, type = null) => {
         } else if (type) {
             pokemons = await getPokemonsFromAPI(`https://pokebuildapi.fr/api/v1/pokemon/type/${type}`);
         } else {
-            pokemons = await getPokemonsFromAPI("https://pokebuildapi.fr/api/v1/pokemon/limit/10");
+            pokemons = await getPokemonsFromAPI("https://pokebuildapi.fr/api/v1/pokemon/limit/28");
         }
         if (typeof pokemons.data[Symbol.iterator] === "function") {
             for (const pokemon of pokemons.data) {
@@ -22,6 +23,7 @@ const showPokemons = async (name = null, type = null) => {
     }
 }
 
+// Connexion à l'API et recuperation des données
 const getPokemonsFromAPI = async (url) => {
     try {
         const res = await axios.get(url);
@@ -32,6 +34,37 @@ const getPokemonsFromAPI = async (url) => {
     }
 }
 
+// Recuperation de la demande utilisateur et appel de showPokemon en fonction
+function sortPokemon() {
+    const nameInput = document.querySelector('#name');
+    const typeInput = document.querySelector('#type');
+    const searchBtn = document.querySelector('.search-btn');
+    searchBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        removeAllPokemons();
+        const userPokemonName = nameInput.value;
+        const userPokemonType = typeInput.value;
+        if (userPokemonName) {
+            showPokemons(userPokemonName)
+        }
+        else if (userPokemonType) {
+            showPokemons(null, userPokemonType)
+        }
+        else {
+            showPokemons(null, null)
+        }
+    })
+}
+
+// Supprime l'affichage des cartes pokemons
+function removeAllPokemons() {
+    const pokemonDivs = document.querySelectorAll(".pokemon-card-container");
+    for (const pokemonDiv of pokemonDivs) {
+        pokemonDiv.remove()
+    }
+}
+
+// Crée les cartes Pokemons à afficher en fonction des données de chaque pokemon 
 function makePokemonCard(pokemonData) {
     const pokemonList = document.querySelector('.pokemons-list')
     const pokemonDiv = document.createElement('div');
@@ -56,6 +89,7 @@ function makePokemonCard(pokemonData) {
     pokemonList.append(pokemonDiv);
 }
 
+// Regle les caracteristiques du Popover de chaque Pokemons
 function setPopover(pokemonInfo, element) {
     element.setAttribute('class', "custom-popover");
     element.setAttribute('tabindex', "0");
@@ -74,6 +108,8 @@ function setPopover(pokemonInfo, element) {
     element.setAttribute('data-bs-content', content);
     element.setAttribute('data-bs-container', "body");
 }
+
+// Renvoie les couleurs associées aux types du pokemon
 function colorOfType(types) {
     const borderColor = [];
     const boxShadowColor = [];
@@ -127,40 +163,13 @@ function colorOfType(types) {
     return [borderColor, boxShadowColor]
 }
 
-
-function sortPokemon() {
-    const nameInput = document.querySelector('#name');
-    const typeInput = document.querySelector('#type');
-    const searchBtn = document.querySelector('.search-btn');
-    searchBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        removeAllPokemons();
-        const userPokemonName = nameInput.value;
-        const userPokemonType = typeInput.value;
-        if (userPokemonName) {
-            showPokemons(userPokemonName)
-        }
-        else if (userPokemonType) {
-            showPokemons(null, userPokemonType)
-        }
-        else {
-            showPokemons(null, null)
-        }
-    })
-}
-
-function removeAllPokemons() {
-    const pokemonDivs = document.querySelectorAll(".pokemon-card-container");
-    for (const pokemonDiv of pokemonDivs) {
-        pokemonDiv.remove()
-    }
-}
-
-
+// Passe en majuscule la première lettre et remplace les underscore par des espaces
 function capitalizeAndDelUnderscore(string) {
     let capitalize = string.charAt().toUpperCase() + string.slice(1);
     capitalize = capitalize.replace('_', ' ')
     return capitalize
 }
+
+
 showPokemons()
 sortPokemon()
